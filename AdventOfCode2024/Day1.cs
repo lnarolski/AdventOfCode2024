@@ -1,11 +1,11 @@
-class Day1
+class Day1 : IAlgorithms, IStars
 {
     public Day1() {
         Star1();
         Star2();
     }
 
-    private void Star1Algorithm(string filePath) {
+    public void Star1Algorithm(string filePath) {
         long totalDistance = 0;
 
         List<long> leftList = new List<long>();
@@ -32,7 +32,7 @@ class Day1
         Console.WriteLine($"Star 1: {totalDistance}");
     }
 
-    private void Star2Algorithm(string filePath) {
+    public void Star2Algorithm(string filePath) {
         long similarityScore = 0;
 
         List<long> leftList = new List<long>();
@@ -65,13 +65,13 @@ class Day1
         Console.WriteLine($"Star 2: {similarityScore}");
     }
 
-    private void Star1() {
+    public void Star1() {
         // Star1Algorithm("../../../Examples/Day1Star1Example1.txt");
 
         Star1Algorithm("../../../Input/Day1Star1.txt");
     }
 
-    private void Star2() {
+    public void Star2() {
         // Star2Algorithm("../../../Examples/Day1Star1Example1.txt");
 
         Star2Algorithm("../../../Input/Day1Star1.txt");
