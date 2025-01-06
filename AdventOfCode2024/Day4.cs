@@ -15,302 +15,70 @@ class Day4 : IAlgorithms, IStars
 
         var input = IAlgorithms.LoadLines(filePath);
 
-        string stringToFind = "XMAS";
+        string regexXMAS = @"XMAS";
+        string regexSAMX = @"SAMX";
+        string line;
 
         // HORIZONTAL
-        int forwardIndex = 0, backwardIndex = stringToFind.Length - 1;
         for (int y = 0; y < input.Count; y++)
         {
-            forwardIndex = 0;
-            backwardIndex = stringToFind.Length - 1;
-            for (int x = 0; x < input[0].Length; x++)
-            {
-                if (input[y][x] == stringToFind[forwardIndex])
-                {
-                    forwardIndex++;
-
-                    if (forwardIndex == stringToFind.Length)
-                    {
-                        result++;
-                        forwardIndex = 0;
-                    }
-                }
-                else
-                {
-                    forwardIndex = 0;
-
-                    if (input[y][x] == stringToFind[forwardIndex])
-                    {
-                        forwardIndex++;
-                    }
-                }
-
-                if (input[y][x] == stringToFind[backwardIndex])
-                {
-                    backwardIndex--;
-
-                    if (backwardIndex == -1)
-                    {
-                        result++;
-                        backwardIndex = stringToFind.Length - 1;
-                    }
-                }
-                else
-                {
-                    backwardIndex = stringToFind.Length - 1;
-
-                    if (input[y][x] == stringToFind[backwardIndex])
-                    {
-                        backwardIndex--;
-                    }
-                }
-            }
+            result += Regex.Matches(input[y], regexXMAS).Count + Regex.Matches(input[y], regexSAMX).Count;
         }
         //
 
         // VERTICAL
         for (int x = 0; x < input[0].Length; x++)
         {
-            forwardIndex = 0;
-            backwardIndex = stringToFind.Length - 1;
+            line = "";
             for (int y = 0; y < input.Count; y++)
             {
-                if (input[y][x] == stringToFind[forwardIndex])
-                {
-                    forwardIndex++;
-
-                    if (forwardIndex == stringToFind.Length)
-                    {
-                        result++;
-                        forwardIndex = 0;
-                    }
-                }
-                else
-                {
-                    forwardIndex = 0;
-
-                    if (input[y][x] == stringToFind[forwardIndex])
-                    {
-                        forwardIndex++;
-                    }
-                }
-
-                if (input[y][x] == stringToFind[backwardIndex])
-                {
-                    backwardIndex--;
-
-                    if (backwardIndex == -1)
-                    {
-                        result++;
-                        backwardIndex = stringToFind.Length - 1;
-                    }
-                }
-                else
-                {
-                    backwardIndex = stringToFind.Length - 1;
-
-                    if (input[y][x] == stringToFind[backwardIndex])
-                    {
-                        backwardIndex--;
-                    }
-                }
+                line += input[y][x];
             }
+            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
         }
         //
 
         // DIAGONAL
         for (int y = input.Count - 1; y > 0; y--)
         {
-            forwardIndex = 0;
-            backwardIndex = stringToFind.Length - 1;
+            line = "";
             for (int x = 0; x < input[0].Length && y + x < input.Count; x++)
             {
-                if (input[y + x][x] == stringToFind[forwardIndex])
-                {
-                    forwardIndex++;
-
-                    if (forwardIndex == stringToFind.Length)
-                    {
-                        result++;
-                        forwardIndex = 0;
-                    }
-                }
-                else
-                {
-                    forwardIndex = 0;
-
-                    if (input[y + x][x] == stringToFind[forwardIndex])
-                    {
-                        forwardIndex++;
-                    }
-                }
-
-                if (input[y + x][x] == stringToFind[backwardIndex])
-                {
-                    backwardIndex--;
-
-                    if (backwardIndex == -1)
-                    {
-                        result++;
-                        backwardIndex = stringToFind.Length - 1;
-                    }
-                }
-                else
-                {
-                    backwardIndex = stringToFind.Length - 1;
-
-                    if (input[y + x][x] == stringToFind[backwardIndex])
-                    {
-                        backwardIndex--;
-                    }
-                }
+                line += input[y + x][x];
             }
+            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
         }
 
         for (int x = 0; x < input[0].Length; x++)
         {
-            forwardIndex = 0;
-            backwardIndex = stringToFind.Length - 1;
+            line = "";
             for (int y = 0; y < input.Count && y + x < input[0].Length; y++)
             {
-                if (input[y][x + y] == stringToFind[forwardIndex])
-                {
-                    forwardIndex++;
-
-                    if (forwardIndex == stringToFind.Length)
-                    {
-                        result++;
-                        forwardIndex = 0;
-                    }
-                }
-                else
-                {
-                    forwardIndex = 0;
-
-                    if (input[y][x + y] == stringToFind[forwardIndex])
-                    {
-                        forwardIndex++;
-                    }
-                }
-
-                if (input[y][x + y] == stringToFind[backwardIndex])
-                {
-                    backwardIndex--;
-
-                    if (backwardIndex == -1)
-                    {
-                        result++;
-                        backwardIndex = stringToFind.Length - 1;
-                    }
-                }
-                else
-                {
-                    backwardIndex = stringToFind.Length - 1;
-
-                    if (input[y][x + y] == stringToFind[backwardIndex])
-                    {
-                        backwardIndex--;
-                    }
-                }
+                line += input[y][x + y];
             }
+            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
         }
         //
 
         // DIAGONAL BACKWARD
         for (int y = input.Count - 1; y > 0; y--)
         {
-            forwardIndex = 0;
-            backwardIndex = stringToFind.Length - 1;
+            line = "";
             for (int x = input[0].Length - 1; x > 0 && y + (input[0].Length - 1 - x) < input.Count; x--)
             {
-                if (input[y + (input[0].Length - 1 - x)][x] == stringToFind[forwardIndex])
-                {
-                    forwardIndex++;
-
-                    if (forwardIndex == stringToFind.Length)
-                    {
-                        result++;
-                        forwardIndex = 0;
-                    }
-                }
-                else
-                {
-                    forwardIndex = 0;
-
-                    if (input[y + (input[0].Length - 1 - x)][x] == stringToFind[forwardIndex])
-                    {
-                        forwardIndex++;
-                    }
-                }
-
-                if (input[y + (input[0].Length - 1 - x)][x] == stringToFind[backwardIndex])
-                {
-                    backwardIndex--;
-
-                    if (backwardIndex == -1)
-                    {
-                        result++;
-                        backwardIndex = stringToFind.Length - 1;
-                    }
-                }
-                else
-                {
-                    backwardIndex = stringToFind.Length - 1;
-
-                    if (input[y + (input[0].Length - 1 - x)][x] == stringToFind[backwardIndex])
-                    {
-                        backwardIndex--;
-                    }
-                }
+                line += input[y + (input[0].Length - 1 - x)][x];
             }
+            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
         }
 
         for (int x = input[0].Length - 1; x > 0; x--)
         {
-            forwardIndex = 0;
-            backwardIndex = stringToFind.Length - 1;
+            line = "";
             for (int y = 0; y < input.Count && x - y > 0; y++)
             {
-                if (input[y][x - y] == stringToFind[forwardIndex])
-                {
-                    forwardIndex++;
-
-                    if (forwardIndex == stringToFind.Length)
-                    {
-                        result++;
-                        forwardIndex = 0;
-                    }
-                }
-                else
-                {
-                    forwardIndex = 0;
-
-                    if (input[y][x - y] == stringToFind[forwardIndex])
-                    {
-                        forwardIndex++;
-                    }
-                }
-
-                if (input[y][x - y] == stringToFind[backwardIndex])
-                {
-                    backwardIndex--;
-
-                    if (backwardIndex == -1)
-                    {
-                        result++;
-                        backwardIndex = stringToFind.Length - 1;
-                    }
-                }
-                else
-                {
-                    backwardIndex = stringToFind.Length - 1;
-
-                    if (input[y][x - y] == stringToFind[backwardIndex])
-                    {
-                        backwardIndex--;
-                    }
-                }
+                line += input[y][x - y];
             }
+            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
         }
         //
 
@@ -330,8 +98,8 @@ class Day4 : IAlgorithms, IStars
     {
         // Star1Algorithm("../../../Examples/Day4Star1Example1.txt");
         // Star1Algorithm("../../../Examples/Day4Star1Example2.txt");
-        Star1Algorithm("../../../Examples/Day4Star1Example3.txt");
-        // Star1Algorithm("../../../Examples/Day4Star1Example4.txt");
+        // Star1Algorithm("../../../Examples/Day4Star1Example3.txt");
+        Star1Algorithm("../../../Examples/Day4Star1Example4.txt");
 
         // Star1Algorithm("../../../Input/Day4Star1.txt");
     }
