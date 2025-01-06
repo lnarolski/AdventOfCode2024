@@ -32,22 +32,28 @@ class Day3 : IAlgorithms, IStars
     {
         long result = 0;
 
+        long matches = 0, doCommands = 0, dontCommands = 0;
+
         var programLines = IAlgorithms.LoadLines(filePath);
 
+        bool doCommand = true;
         foreach (var line in programLines)
         {
             var regexMatches = Regex.Matches(line, @"(?<=mul\()\d+,\d+(?=\))|do\(\)|don't\(\)");
 
-            bool doCommand = true;
+            matches += regexMatches.Count;
+
             foreach (Match mulInstruction in regexMatches)
             {
                 switch (mulInstruction.Value)
                 {
                     case "do()":
                         doCommand = true;
+                        ++doCommands;
                         break;
                     case "don't()":
                         doCommand = false;
+                        ++dontCommands;
                         break;
                     default:
                         if (doCommand) {
@@ -59,6 +65,7 @@ class Day3 : IAlgorithms, IStars
             }
         }
 
+        Console.WriteLine($"Matches: {matches}, Do(): {doCommands}, Don't(): {dontCommands}");
         Console.WriteLine($"Star 2: {result}");
     }
 
