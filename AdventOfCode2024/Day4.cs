@@ -15,88 +15,97 @@ class Day4 : IAlgorithms, IStars
         var input = IAlgorithms.LoadLines(filePath);
 
         string stringToFind = "XMAS";
+
+        // VERTICAL
         int forwardIndex = 0, backwardIndex = stringToFind.Length - 1;
         for (int y = 0; y < input.Count; y++)
         {
+            forwardIndex = 0;
+            backwardIndex = stringToFind.Length - 1;
             for (int x = 0; x < input[0].Length; x++)
             {
                 if (input[y][x] == stringToFind[forwardIndex]) {
+                    forwardIndex++;
+
                     if (forwardIndex == stringToFind.Length - 1) {
                         result++;
                         forwardIndex = 0;
-                    } else {
-                        forwardIndex++;
                     }
                 } else {
                     forwardIndex = 0;
                 }
 
                 if (input[y][x] == stringToFind[backwardIndex]) {
+                    backwardIndex--;
+
                     if (backwardIndex == 0) {
                         result++;
                         backwardIndex = stringToFind.Length - 1;
-                    } else {
-                        backwardIndex--;
                     }
                 } else {
                     backwardIndex = stringToFind.Length - 1;
                 }
             }
         }
+        //
 
-        forwardIndex = 0;
-        backwardIndex = stringToFind.Length - 1;
+
+        // HORIZONTAL
         for (int x = 0; x < input[0].Length; x++)
         {
+            forwardIndex = 0;
+            backwardIndex = stringToFind.Length - 1;
             for (int y = 0; y < input.Count; y++)
             {
                 if (input[y][x] == stringToFind[forwardIndex]) {
+                    forwardIndex++;
+
                     if (forwardIndex == stringToFind.Length - 1) {
                         result++;
                         forwardIndex = 0;
-                    } else {
-                        forwardIndex++;
                     }
                 } else {
                     forwardIndex = 0;
                 }
 
                 if (input[y][x] == stringToFind[backwardIndex]) {
+                    backwardIndex--;
+
                     if (backwardIndex == 0) {
                         result++;
                         backwardIndex = stringToFind.Length - 1;
-                    } else {
-                        backwardIndex--;
                     }
                 } else {
                     backwardIndex = stringToFind.Length - 1;
                 }
             }
         }
+        //
 
-        forwardIndex = 0;
-        backwardIndex = stringToFind.Length - 1;
-        for (int y = input.Count - stringToFind.Length; y > 0; y--)
+        // DIAGONAL
+        for (int y = input.Count - 1; y > 0; y--)
         {
+            forwardIndex = 0;
+            backwardIndex = stringToFind.Length - 1;
             for (int x = 0; x < input[0].Length && y + x < input.Count; x++)
             {
                 if (input[y + x][x] == stringToFind[forwardIndex]) {
+                    forwardIndex++;
+
                     if (forwardIndex == stringToFind.Length - 1) {
                         result++;
                         forwardIndex = 0;
-                    } else {
-                        forwardIndex++;
                     }
                 } else {
                     forwardIndex = 0;
                 }
 
                 if (input[y + x][x] == stringToFind[backwardIndex]) {
+                    backwardIndex--;
+
                     if (backwardIndex == 0) {
                         result++;
                         backwardIndex = stringToFind.Length - 1;
-                    } else {
-                        backwardIndex--;
                     }
                 } else {
                     backwardIndex = stringToFind.Length - 1;
@@ -104,35 +113,98 @@ class Day4 : IAlgorithms, IStars
             }
         }
 
-        forwardIndex = 0;
-        backwardIndex = stringToFind.Length - 1;
-        for (int x = 1; x < input[0].Length - stringToFind.Length + 1; x++)
+        for (int x = 0; x < input[0].Length; x++)
         {
+            forwardIndex = 0;
+            backwardIndex = stringToFind.Length - 1;
             for (int y = 0; y < input.Count && y + x < input[0].Length; y++)
             {
                 if (input[y][x + y] == stringToFind[forwardIndex]) {
+                    forwardIndex++;
+
                     if (forwardIndex == stringToFind.Length - 1) {
                         result++;
                         forwardIndex = 0;
-                    } else {
-                        forwardIndex++;
                     }
                 } else {
                     forwardIndex = 0;
                 }
 
                 if (input[y][x + y] == stringToFind[backwardIndex]) {
+                    backwardIndex--;
+
                     if (backwardIndex == 0) {
                         result++;
                         backwardIndex = stringToFind.Length - 1;
-                    } else {
-                        backwardIndex--;
                     }
                 } else {
                     backwardIndex = stringToFind.Length - 1;
                 }
             }
         }
+        //
+
+        // DIAGONAL BACKWARD
+        for (int y = input.Count - 1; y > 0; y--)
+        {
+            forwardIndex = 0;
+            backwardIndex = stringToFind.Length - 1;
+            for (int x = input[0].Length - 1; x > 0 && y + (input[0].Length - 1 - x) < input.Count; x--)
+            {
+                if (input[y + (input[0].Length - 1 - x)][x] == stringToFind[forwardIndex]) {
+                    forwardIndex++;
+
+                    if (forwardIndex == stringToFind.Length - 1) {
+                        result++;
+                        forwardIndex = 0;
+                    }
+                } else {
+                    forwardIndex = 0;
+                }
+
+                if (input[y + (input[0].Length - 1 - x)][x] == stringToFind[backwardIndex]) {
+                    backwardIndex--;
+
+                    if (backwardIndex == 0) {
+                        result++;
+                        backwardIndex = stringToFind.Length - 1;
+                    }
+                } else {
+                    backwardIndex = stringToFind.Length - 1;
+                }
+            }
+        }
+
+        for (int x = input[0].Length - 1; x > 0; x--)
+        {
+            forwardIndex = 0;
+            backwardIndex = stringToFind.Length - 1;
+            for (int y = 0; y < input.Count && x - y > 0; y++)
+            {
+                if (input[y][x - y] == stringToFind[forwardIndex]) {
+                    forwardIndex++;
+
+                    if (forwardIndex == stringToFind.Length - 1) {
+                        result++;
+                        forwardIndex = 0;
+                    }
+                } else {
+                    forwardIndex = 0;
+                }
+
+                if (input[y][x - y] == stringToFind[backwardIndex]) {
+                    backwardIndex--;
+
+                    if (backwardIndex == 0) {
+                        result++;
+                        backwardIndex = stringToFind.Length - 1;
+                    }
+                } else {
+                    backwardIndex = stringToFind.Length - 1;
+                }
+            }
+        }
+        //
 
         Console.WriteLine($"Star 1: {result}");
     }
@@ -149,6 +221,7 @@ class Day4 : IAlgorithms, IStars
     public void Star1() {
         Star1Algorithm("../../../Examples/Day4Star1Example1.txt");
         // Star1Algorithm("../../../Examples/Day4Star1Example2.txt");
+        // Star1Algorithm("../../../Examples/Day4Star1Example3.txt");
 
         // Star1Algorithm("../../../Input/Day4Star1.txt");
     }
