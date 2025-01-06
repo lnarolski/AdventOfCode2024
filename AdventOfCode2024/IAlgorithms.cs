@@ -21,4 +21,19 @@ public interface IAlgorithms
 
         return matrix;
     }
+
+    public static List<string> LoadLines(string filePath) {
+        var lines = new List<string>();
+
+        var file = File.OpenText(filePath);
+        var line = file.ReadLine();
+        while (line != null)
+        {
+            lines.Add(line);
+            
+            line = file.ReadLine();
+        }
+
+        return lines;
+    }
 }

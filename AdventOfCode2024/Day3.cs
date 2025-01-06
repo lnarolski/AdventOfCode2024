@@ -1,4 +1,6 @@
 
+using System.Text.RegularExpressions;
+
 class Day3 : IAlgorithms, IStars
 {
     public Day3() {
@@ -8,11 +10,22 @@ class Day3 : IAlgorithms, IStars
 
     public void Star1Algorithm(string filePath)
     {
-        var reports = IAlgorithms.LoadMatrix(filePath);
+        long result = 0;
 
-        
+        var programLines = IAlgorithms.LoadLines(filePath);
 
-        Console.WriteLine($"Star 1: {safeReports}");
+        foreach (var line in programLines)
+        {
+            var regexMatches = Regex.Matches(line, @"mul\((\d+,\d+)\)");
+
+            foreach (Match mulInstruction in regexMatches)
+            {
+                var values = mulInstruction.Groups[1].Value.Split(',');
+                result += Convert.ToInt64(values[0]) * Convert.ToInt64(values[1]);
+            }
+        }
+
+        Console.WriteLine($"Star 1: {result}");
     }
 
     public void Star2Algorithm(string filePath)
@@ -92,9 +105,9 @@ class Day3 : IAlgorithms, IStars
     }
 
     public void Star1() {
-        Star1Algorithm("../../../Examples/Day3Star1Example1.txt");
+        // Star1Algorithm("../../../Examples/Day3Star1Example1.txt");
 
-        // Star1Algorithm("../../../Input/Day3Star1.txt");
+        Star1Algorithm("../../../Input/Day3Star1.txt");
     }
 
     public void Star2() {
