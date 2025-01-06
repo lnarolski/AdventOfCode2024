@@ -5,7 +5,7 @@ class Day3 : IAlgorithms, IStars
 {
     public Day3() {
         Star1();
-        // Star2();
+        Star2();
     }
 
     public void Star1Algorithm(string filePath)
@@ -16,11 +16,11 @@ class Day3 : IAlgorithms, IStars
 
         foreach (var line in programLines)
         {
-            var regexMatches = Regex.Matches(line, @"mul\((\d+,\d+)\)");
+            var regexMatches = Regex.Matches(line, @"(?<=mul\()\d+,\d+(?=\))");
 
             foreach (Match mulInstruction in regexMatches)
             {
-                var values = mulInstruction.Groups[1].Value.Split(',');
+                var values = mulInstruction.Value.Split(',');
                 result += Convert.ToInt64(values[0]) * Convert.ToInt64(values[1]);
             }
         }
@@ -30,78 +30,36 @@ class Day3 : IAlgorithms, IStars
 
     public void Star2Algorithm(string filePath)
     {
-        var reports = IAlgorithms.LoadMatrix(filePath);
+        long result = 0;
 
-        long safeReports = 0;
-        foreach (var report in reports) {
-            bool safe = true;
-            bool ascending = false;
-            bool warning = false;
-            for (int i = 0; i < report.Count - 1; ++i) {
-                if (report[i] == report[i + 1]) {
-                    safe = false;
-                    warning = true;
-                    break;
-                }
+        var programLines = IAlgorithms.LoadLines(filePath);
 
-                if (i == 0) {
-                    ascending = report[1] > report[0];
-                } else {
-                    if (report[i] > report[i + 1] && ascending ||
-                        report[i] < report[i + 1] && !ascending) {
-                        safe = false;
-                        warning = true;
-                        break;
-                    }
-                }
+        foreach (var line in programLines)
+        {
+            var regexMatches = Regex.Matches(line, @"(?<=mul\()\d+,\d+(?=\))|do\(\)|don't\(\)");
 
-                if (Math.Abs(report[i] - report[i + 1]) > 3) {
-                    safe = false;
-                    warning = true;
-                    break;
-                }
-            }
-
-            for (int indexToRemove = 0; warning && indexToRemove < report.Count; ++indexToRemove)
+            bool doCommand = true;
+            foreach (Match mulInstruction in regexMatches)
             {
-                bool tempSafe = true;
-                var tempReport = new List<long>(report);
-                tempReport.RemoveAt(indexToRemove);
-
-                ascending = false;
-                for (int i = 0; i < tempReport.Count - 1; ++i) {
-                    if (tempReport[i] == tempReport[i + 1]) {
-                        tempSafe = false;
+                switch (mulInstruction.Value)
+                {
+                    case "do()":
+                        doCommand = true;
                         break;
-                    }
-
-                    if (i == 0) {
-                        ascending = tempReport[1] > tempReport[0];
-                    } else {
-                        if (tempReport[i] > tempReport[i + 1] && ascending ||
-                            tempReport[i] < tempReport[i + 1] && !ascending) {
-                            tempSafe = false;
-                            break;
+                    case "don't()":
+                        doCommand = false;
+                        break;
+                    default:
+                        if (doCommand) {
+                            var values = mulInstruction.Value.Split(',');
+                            result += Convert.ToInt64(values[0]) * Convert.ToInt64(values[1]);
                         }
-                    }
-
-                    if (Math.Abs(tempReport[i] - tempReport[i + 1]) > 3) {
-                        tempSafe = false;
                         break;
-                    }
                 }
-
-                if (tempSafe) {
-                    safe = true;
-                }
-            }
-
-            if (safe) {
-                safeReports += 1;
             }
         }
 
-        Console.WriteLine($"Star 2: {safeReports}");
+        Console.WriteLine($"Star 2: {result}");
     }
 
     public void Star1() {
@@ -111,7 +69,7 @@ class Day3 : IAlgorithms, IStars
     }
 
     public void Star2() {
-        // Star2Algorithm("../../../Examples/Day3Star1Example1.txt");
+        // Star2Algorithm("../../../Examples/Day3Star2Example1.txt");
 
         Star2Algorithm("../../../Input/Day3Star1.txt");
     }
