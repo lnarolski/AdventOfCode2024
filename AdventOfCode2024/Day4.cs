@@ -148,6 +148,7 @@ class Day4 : IAlgorithms, IStars
 
     public void Star1() {
         Star1Algorithm("../../../Examples/Day4Star1Example1.txt");
+        // Star1Algorithm("../../../Examples/Day4Star1Example2.txt");
 
         // Star1Algorithm("../../../Input/Day4Star1.txt");
     }
