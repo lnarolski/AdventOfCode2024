@@ -34,7 +34,9 @@ class Day4 : IAlgorithms, IStars
             {
                 line += input[y][x];
             }
-            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
+            var matchesXMAS = Regex.Matches(line, regexXMAS);
+            var matchesSAMX = Regex.Matches(line, regexSAMX);
+            result += matchesXMAS.Count + matchesSAMX.Count;
         }
         //
 
@@ -46,7 +48,9 @@ class Day4 : IAlgorithms, IStars
             {
                 line += input[y + x][x];
             }
-            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
+            var matchesXMAS = Regex.Matches(line, regexXMAS);
+            var matchesSAMX = Regex.Matches(line, regexSAMX);
+            result += matchesXMAS.Count + matchesSAMX.Count;
         }
 
         for (int x = 0; x < input[0].Length; x++)
@@ -56,7 +60,9 @@ class Day4 : IAlgorithms, IStars
             {
                 line += input[y][x + y];
             }
-            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
+            var matchesXMAS = Regex.Matches(line, regexXMAS);
+            var matchesSAMX = Regex.Matches(line, regexSAMX);
+            result += matchesXMAS.Count + matchesSAMX.Count;
         }
         //
 
@@ -68,7 +74,9 @@ class Day4 : IAlgorithms, IStars
             {
                 line += input[y + (input[0].Length - 1 - x)][x];
             }
-            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
+            var matchesXMAS = Regex.Matches(line, regexXMAS);
+            var matchesSAMX = Regex.Matches(line, regexSAMX);
+            result += matchesXMAS.Count + matchesSAMX.Count;
         }
 
         for (int x = input[0].Length - 1; x > 0; x--)
@@ -78,7 +86,9 @@ class Day4 : IAlgorithms, IStars
             {
                 line += input[y][x - y];
             }
-            result += Regex.Matches(line, regexXMAS).Count + Regex.Matches(line, regexSAMX).Count;
+            var matchesXMAS = Regex.Matches(line, regexXMAS);
+            var matchesSAMX = Regex.Matches(line, regexSAMX);
+            result += matchesXMAS.Count + matchesSAMX.Count;
         }
         //
 
