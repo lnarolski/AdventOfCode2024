@@ -22,9 +22,14 @@ class Day4 : IAlgorithms, IStars
         // HORIZONTAL
         for (int y = 0; y < input.Count; y++)
         {
-            result += Regex.Matches(input[y], regexXMAS).Count + Regex.Matches(input[y], regexSAMX).Count;
+            long found = Regex.Matches(input[y], regexXMAS).Count + Regex.Matches(input[y], regexSAMX).Count;
+            result += found;
+            Console.WriteLine(input[y]);
+            Console.WriteLine($"Found: {found}");
         }
         //
+
+        Console.WriteLine();
 
         // VERTICAL
         for (int x = 0; x < input[0].Length; x++)
@@ -36,9 +41,14 @@ class Day4 : IAlgorithms, IStars
             }
             var matchesXMAS = Regex.Matches(line, regexXMAS);
             var matchesSAMX = Regex.Matches(line, regexSAMX);
-            result += matchesXMAS.Count + matchesSAMX.Count;
+            long found = matchesXMAS.Count + matchesSAMX.Count;
+            result += found;
+            Console.WriteLine(line);
+            Console.WriteLine($"Found: {found}");
         }
         //
+
+        Console.WriteLine();
 
         // DIAGONAL
         for (int y = input.Count - 1; y > 0; y--)
@@ -50,7 +60,10 @@ class Day4 : IAlgorithms, IStars
             }
             var matchesXMAS = Regex.Matches(line, regexXMAS);
             var matchesSAMX = Regex.Matches(line, regexSAMX);
-            result += matchesXMAS.Count + matchesSAMX.Count;
+            long found = matchesXMAS.Count + matchesSAMX.Count;
+            result += found;
+            Console.WriteLine(line);
+            Console.WriteLine($"Found: {found}");
         }
 
         for (int x = 0; x < input[0].Length; x++)
@@ -62,9 +75,14 @@ class Day4 : IAlgorithms, IStars
             }
             var matchesXMAS = Regex.Matches(line, regexXMAS);
             var matchesSAMX = Regex.Matches(line, regexSAMX);
-            result += matchesXMAS.Count + matchesSAMX.Count;
+            long found = matchesXMAS.Count + matchesSAMX.Count;
+            result += found;
+            Console.WriteLine(line);
+            Console.WriteLine($"Found: {found}");
         }
         //
+
+        Console.WriteLine();
 
         // DIAGONAL BACKWARD
         for (int y = input.Count - 1; y > 0; y--)
@@ -76,7 +94,10 @@ class Day4 : IAlgorithms, IStars
             }
             var matchesXMAS = Regex.Matches(line, regexXMAS);
             var matchesSAMX = Regex.Matches(line, regexSAMX);
-            result += matchesXMAS.Count + matchesSAMX.Count;
+            long found = matchesXMAS.Count + matchesSAMX.Count;
+            result += found;
+            Console.WriteLine(line);
+            Console.WriteLine($"Found: {found}");
         }
 
         for (int x = input[0].Length - 1; x > 0; x--)
@@ -88,7 +109,10 @@ class Day4 : IAlgorithms, IStars
             }
             var matchesXMAS = Regex.Matches(line, regexXMAS);
             var matchesSAMX = Regex.Matches(line, regexSAMX);
-            result += matchesXMAS.Count + matchesSAMX.Count;
+            long found = matchesXMAS.Count + matchesSAMX.Count;
+            result += found;
+            Console.WriteLine(line);
+            Console.WriteLine($"Found: {found}");
         }
         //
 
