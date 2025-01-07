@@ -6,7 +6,7 @@ class Day4 : IAlgorithms, IStars
     public Day4()
     {
         Star1();
-        // Star2();
+        Star2();
     }
 
     public void Star1Algorithm(string filePath)
@@ -123,7 +123,21 @@ class Day4 : IAlgorithms, IStars
     {
         long result = 0;
 
+        var input = IAlgorithms.LoadLines(filePath);
 
+        for (int y = 1; y < input.Count - 1; ++y) {
+            for (int x = 1; x < input[0].Length - 1; ++x) {
+                if (input[y][x] == 'A') {
+                    if ((input[y - 1][x - 1] == 'S' && input[y + 1][x + 1] == 'M') ||
+                        (input[y - 1][x - 1] == 'M' && input[y + 1][x + 1] == 'S')) {
+                        if ((input[y - 1][x + 1] == 'S' && input[y + 1][x - 1] == 'M') ||
+                            (input[y - 1][x + 1] == 'M' && input[y + 1][x - 1] == 'S')) {
+                            ++result;
+                        }
+                    }
+                }
+            }
+        }
 
         Console.WriteLine($"Star 2: {result}");
     }
@@ -140,7 +154,7 @@ class Day4 : IAlgorithms, IStars
 
     public void Star2()
     {
-        // Star2Algorithm("../../../Examples/Day4Star2Example1.txt");
+        // Star2Algorithm("../../../Examples/Day4Star1Example1.txt");
 
         Star2Algorithm("../../../Input/Day4Star1.txt");
     }
