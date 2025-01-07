@@ -24,8 +24,8 @@ class Day4 : IAlgorithms, IStars
         {
             long found = Regex.Matches(input[y], regexXMAS).Count + Regex.Matches(input[y], regexSAMX).Count;
             result += found;
-            Console.WriteLine(input[y]);
-            Console.WriteLine($"Found: {found}");
+            // Console.WriteLine(input[y]);
+            // Console.WriteLine($"Found: {found}");
         }
         //
 
@@ -43,8 +43,8 @@ class Day4 : IAlgorithms, IStars
             var matchesSAMX = Regex.Matches(line, regexSAMX);
             long found = matchesXMAS.Count + matchesSAMX.Count;
             result += found;
-            Console.WriteLine(line);
-            Console.WriteLine($"Found: {found}");
+            // Console.WriteLine(line);
+            // Console.WriteLine($"Found: {found}");
         }
         //
 
@@ -62,8 +62,8 @@ class Day4 : IAlgorithms, IStars
             var matchesSAMX = Regex.Matches(line, regexSAMX);
             long found = matchesXMAS.Count + matchesSAMX.Count;
             result += found;
-            Console.WriteLine(line);
-            Console.WriteLine($"Found: {found}");
+            // Console.WriteLine(line);
+            // Console.WriteLine($"Found: {found}");
         }
 
         for (int x = 0; x < input[0].Length; x++)
@@ -77,8 +77,8 @@ class Day4 : IAlgorithms, IStars
             var matchesSAMX = Regex.Matches(line, regexSAMX);
             long found = matchesXMAS.Count + matchesSAMX.Count;
             result += found;
-            Console.WriteLine(line);
-            Console.WriteLine($"Found: {found}");
+            // Console.WriteLine(line);
+            // Console.WriteLine($"Found: {found}");
         }
         //
 
@@ -96,14 +96,14 @@ class Day4 : IAlgorithms, IStars
             var matchesSAMX = Regex.Matches(line, regexSAMX);
             long found = matchesXMAS.Count + matchesSAMX.Count;
             result += found;
-            Console.WriteLine(line);
-            Console.WriteLine($"Found: {found}");
+            // Console.WriteLine(line);
+            // Console.WriteLine($"Found: {found}");
         }
 
         for (int x = input[0].Length - 1; x > 0; x--)
         {
             line = "";
-            for (int y = 0; y < input.Count && x - y > 0; y++)
+            for (int y = 0; y < input.Count && x - y >= 0; y++)
             {
                 line += input[y][x - y];
             }
@@ -111,8 +111,8 @@ class Day4 : IAlgorithms, IStars
             var matchesSAMX = Regex.Matches(line, regexSAMX);
             long found = matchesXMAS.Count + matchesSAMX.Count;
             result += found;
-            Console.WriteLine(line);
-            Console.WriteLine($"Found: {found}");
+            // Console.WriteLine(line);
+            // Console.WriteLine($"Found: {found}");
         }
         //
 
@@ -133,9 +133,9 @@ class Day4 : IAlgorithms, IStars
         // Star1Algorithm("../../../Examples/Day4Star1Example1.txt");
         // Star1Algorithm("../../../Examples/Day4Star1Example2.txt");
         // Star1Algorithm("../../../Examples/Day4Star1Example3.txt");
-        Star1Algorithm("../../../Examples/Day4Star1Example4.txt");
+        // Star1Algorithm("../../../Examples/Day4Star1Example4.txt");
 
-        // Star1Algorithm("../../../Input/Day4Star1.txt");
+        Star1Algorithm("../../../Input/Day4Star1.txt");
     }
 
     public void Star2()
