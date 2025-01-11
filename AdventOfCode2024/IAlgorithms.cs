@@ -22,6 +22,21 @@ public interface IAlgorithms
         return matrix;
     }
 
+    public static List<char[]> LoadCharGrid(string filePath) {
+        var lines = new List<char[]>();
+
+        var file = File.OpenText(filePath);
+        var line = file.ReadLine();
+        while (line != null)
+        {
+            lines.Add(line.ToCharArray());
+            
+            line = file.ReadLine();
+        }
+
+        return lines;
+    }
+
     public static List<string> LoadLines(string filePath) {
         var lines = new List<string>();
 
