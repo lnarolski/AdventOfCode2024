@@ -132,8 +132,17 @@ class Day5 : IAlgorithms, IStars
 
                 for (int j = 1; j < item.Count; ++j) {
                     if (rules.ContainsKey(item[j])) {
-                        if (rules[item[j]].Contains(list.First.Value)) {
+                        bool added = false;
+                        for (LinkedListNode<long> node = list.First; node != null; node = node.Next) {
+                            if (rules[item[j]].Contains(node.Value)) {
+                                list.AddBefore(node, item[j]);
+                                added = true;
+                                break;
+                            }
+                        }
 
+                        if (!added) {
+                            list.AddLast(item[j]);
                         }
                     } else {
                         list.AddLast(item[j]);
@@ -165,8 +174,8 @@ class Day5 : IAlgorithms, IStars
 
     public void Star2()
     {
-        Star2Algorithm("../../../Examples/Day5Star1Example1.txt");
+        // Star2Algorithm("../../../Examples/Day5Star1Example1.txt");
 
-        // Star2Algorithm("../../../Input/Day5Star1.txt");
+        Star2Algorithm("../../../Input/Day5Star1.txt");
     }
 }
