@@ -68,7 +68,7 @@ class Day6 : IAlgorithms, IStars
                     } else if (map[y + 1][x] == '#') {
                         direction++;
                     } else {
-                        y -= 1;
+                        y += 1;
                     }
                     return true;
                 case Direction.left:
@@ -101,6 +101,8 @@ class Day6 : IAlgorithms, IStars
         Guard guard = new Guard(map);
         while (guard.Step(map));
 
+        // IAlgorithms.PrintCharGrid(map);
+
         Console.WriteLine($"Star 1: {guard.distinctPostitions}");
     }
 
@@ -115,15 +117,15 @@ class Day6 : IAlgorithms, IStars
 
     public void Star1()
     {
-        Star1Algorithm("../../../Examples/Day5Star1Example1.txt");
+        // Star1Algorithm("../../../Examples/Day6Star1Example1.txt");
 
-        // Star1Algorithm("../../../Input/Day5Star1.txt");
+        Star1Algorithm("../../../Input/Day6Star1.txt");
     }
 
     public void Star2()
     {
-        Star2Algorithm("../../../Examples/Day5Star1Example1.txt");
+        Star2Algorithm("../../../Examples/Day6Star1Example1.txt");
 
-        // Star2Algorithm("../../../Input/Day5Star1.txt");
+        // Star2Algorithm("../../../Input/Day6Star1.txt");
     }
 }

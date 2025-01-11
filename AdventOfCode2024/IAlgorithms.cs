@@ -37,6 +37,12 @@ public interface IAlgorithms
         return lines;
     }
 
+    public static void PrintCharGrid(List<char[]> grid) {
+        foreach (var line in grid) {
+            Console.WriteLine(line);
+        }
+    }
+
     public static List<string> LoadLines(string filePath) {
         var lines = new List<string>();
 
