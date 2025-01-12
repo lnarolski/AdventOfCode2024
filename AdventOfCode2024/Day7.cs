@@ -83,7 +83,48 @@ class Day7 : IAlgorithms, IStars
     {
         long result = 0;
 
-        
+        var input = IAlgorithms.LoadLines(filePath);
+
+        List<Tuple<long, List<long>>> calibrationEquations = new List<Tuple<long, List<long>>>();
+        foreach (var line in input)
+        {
+            var temp = line.Split(": ");
+            var temp2 = temp[1].Split(' ');
+            var temp3 = new List<long>();
+            foreach (var value in temp2) {
+                temp3.Add(Convert.ToInt64(value));
+            }
+            calibrationEquations.Add(new Tuple<long, List<long>>(Convert.ToInt64(temp[0]), temp3));
+        }
+
+        string allowedOperators = "+*|";
+
+        foreach (var calibrationEquation in calibrationEquations)
+        {
+            var possibleCombinations = GenerateCombinations(allowedOperators, calibrationEquation.Item2.Count - 1);
+            foreach (var possibleCombination in possibleCombinations) {
+                long tempResult = calibrationEquation.Item2[0];
+                for (int i = 0; i < possibleCombination.Length; i++)
+                {
+                    if (possibleCombination[i] == '+') {
+                        tempResult += calibrationEquation.Item2[i + 1];
+                    } else if (possibleCombination[i] == '*') {
+                        tempResult *= calibrationEquation.Item2[i + 1];
+                    } else {
+                        tempResult = Convert.ToInt64(tempResult.ToString() + calibrationEquation.Item2[i + 1].ToString());
+                    }
+
+                    if (tempResult > calibrationEquation.Item1) {
+                        break;
+                    }
+                }
+
+                if (tempResult == calibrationEquation.Item1) {
+                    result += calibrationEquation.Item1;
+                    break;
+                }
+            }
+        }
 
         Console.WriteLine($"Star 2: {result}");
     }
@@ -97,8 +138,8 @@ class Day7 : IAlgorithms, IStars
 
     public void Star2()
     {
-        Star2Algorithm("../../../Examples/Day7Star1Example1.txt");
+        // Star2Algorithm("../../../Examples/Day7Star1Example1.txt");
 
-        // Star2Algorithm("../../../Input/Day7Star1.txt");
+        Star2Algorithm("../../../Input/Day7Star1.txt");
     }
 }
