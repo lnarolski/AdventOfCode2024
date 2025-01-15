@@ -17,7 +17,7 @@ class Day9 : IAlgorithms, IStars
         for (int i = 0; i < input[0].Length; i++)
         {
             if (i % 2 == 0) {
-                inputList.AddLast(new List<int>{id % 10, input[0][i] - '0'});
+                inputList.AddLast(new List<int>{id, input[0][i] - '0'});
                 id++;
             } else {
                 inputList.AddLast(new List<int>{-1, input[0][i] - '0'});
@@ -28,21 +28,18 @@ class Day9 : IAlgorithms, IStars
         var backward = inputList.Last;
         var forward = inputList.First;
         while (true) {
-            if (forward == null) {
+            if (forward == backward) {
                 break;
             }
 
-            if (forward.Value[0] != -1 || forward.Value[1] == 0) {
+            if (forward.Value[0] != -1) {
                 forward = forward.Next;
                 continue;
             }
 
-            while (backward != null && backward.Value[0] == -1) {
+            if (backward.Value[0] == -1) {
                 backward = backward.Previous;
-            }
-
-            if (backward == null) {
-                break;
+                continue;
             }
 
             if (backward.Value[1] >= forward.Value[1]) {
@@ -66,12 +63,12 @@ class Day9 : IAlgorithms, IStars
         int position = 0;
         for (var forward = inputList.First; forward != null; forward = forward.Next) {
             if (forward.Value[0] == -1) {
-                continue;
+                break;
             }
 
             for (int i = 0; i < forward.Value[1]; i++)
             {
-                result += position + forward.Value[0];
+                result += position * forward.Value[0];
                 position++;
             }
         }
@@ -90,9 +87,9 @@ class Day9 : IAlgorithms, IStars
 
     public void Star1()
     {
-        Star1Algorithm("../../../Examples/Day9Star1Example1.txt");
+        // Star1Algorithm("../../../Examples/Day9Star1Example1.txt");
 
-        // Star1Algorithm("../../../Input/Day9Star1.txt");
+        Star1Algorithm("../../../Input/Day9Star1.txt");
     }
 
     public void Star2()
